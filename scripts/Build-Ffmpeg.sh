@@ -65,8 +65,8 @@ cd "$work/ffmpeg-9.0.2"
     --disable-autodetect --disable-everything --disable-network --disable-doc \
     --disable-debug --disable-shared --enable-static --enable-gpl --enable-libx264 --enable-zlib \
     --enable-ffmpeg --enable-ffprobe \
-    --enable-encoder=libx264,gif,png --enable-decoder=h264,png,rawvideo,gif \
-    --enable-parser=h264 --enable-demuxer=mov,image2,rawvideo,gif \
+    --enable-encoder=libx264,gif,png --enable-decoder=h264,png,rawvideo,gif,wrapped_avframe \
+    --enable-parser=h264,gif,png --enable-demuxer=mov,image2,rawvideo,gif \
     --enable-muxer=mp4,gif,image2 --enable-protocol=file,pipe --enable-indev=lavfi \
     --enable-filter=scale,fps,palettegen,paletteuse,format,split,testsrc2,buffer,buffersink
 make -j"$jobs"
