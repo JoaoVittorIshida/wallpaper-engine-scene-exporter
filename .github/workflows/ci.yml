@@ -1,0 +1,42 @@
+name: Windows build and tests
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          global-json-file: global.json
+      - name: Install pinned FFmpeg for integration tests
+        shell: powershell
+        run: ./scripts/Install-Ffmpeg.ps1
+      - name: Restore locked dependencies
+        run: dotnet restore WallpaperSceneExporter.sln --locked-mode -p:Platform=x64
+      - name: Build Release
+        run: dotnet build WallpaperSceneExporter.sln -c Release -p:Platform=x64 --no-restore -warnaserror
+      - name: Run tests
+        run: dotnet test WallpaperSceneExporter.sln -c Release -p:Platform=x64 --no-build --no-restore --logger trx --results-directory TestResults
+      - name: Check NuGet advisories
+        run: dotnet list WallpaperSceneExporter.sln package --vulnerable --include-transitive --no-restore
+      - name: Package portable application
+        shell: powershell
+        run: ./scripts/Publish.ps1
+      - name: Upload portable package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: WallpaperEngineSceneExporter-win-x64
+          path: |
+            artifacts/WallpaperEngineSceneExporter-*-win-x64.zip
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error

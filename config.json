@@ -1,0 +1,16 @@
+{
+  "outputFormat": "gif",
+  "qualityPreset": "high",
+  "durationSeconds": 10,
+  "warmupSeconds": 2,
+  "captureFps": 60,
+  "width": 480,
+  "height": 480,
+  "gifFps": null,
+  "gifColors": null,
+  "gifDithering": null,
+  "keepFailedArtifacts": false,
+  "autoProcess": false,
+  "wallpaperEnginePath": "",
+  "ffmpegPath": ""
+}

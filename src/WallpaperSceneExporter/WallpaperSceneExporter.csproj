@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <AssemblyName>WallpaperSceneExporter</AssemblyName>
+    <Version>1.2.0</Version>
+    <InformationalVersion>1.2.0</InformationalVersion>
+    <Title>Wallpaper Engine Scene Exporter</Title>
+    <Description>Grava cenas do Wallpaper Engine em GIF animado ou vídeo MP4.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeFfmpeg Condition="'$(IncludeFfmpeg)' == ''">true</IncludeFfmpeg>
+    <RootNamespace>WallpaperSceneExporter</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
+    <PackageReference Include="Vortice.DXGI" Version="3.8.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\config.json" Link="config.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Include="ffmpeg\ffmpeg.exe" Condition="'$(IncludeFfmpeg)' == 'true' And Exists('ffmpeg\ffmpeg.exe')" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" TargetPath="ffmpeg\ffmpeg.exe" />
+    <None Include="ffmpeg\ffprobe.exe" Condition="'$(IncludeFfmpeg)' == 'true' And Exists('ffmpeg\ffprobe.exe')" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" TargetPath="ffmpeg\ffprobe.exe" />
+    <None Include="THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+</Project>

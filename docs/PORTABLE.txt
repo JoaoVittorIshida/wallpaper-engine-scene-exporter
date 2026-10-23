@@ -1,0 +1,39 @@
+Wallpaper Engine Scene Exporter 1.2.0
+
+Grave cenas do Wallpaper Engine em GIF animado ou video MP4.
+
+PRIMEIRA EXECUCAO
+1. Extraia todos os arquivos do ZIP para uma pasta onde voce possa gravar.
+2. Execute "Instalar FFmpeg.cmd". E necessario acesso a internet nesta etapa.
+   FFmpeg 9.0.2 e ffprobe sao baixados diretamente de gyan.dev e o SHA-256
+   do pacote e conferido antes da instalacao na subpasta ffmpeg.
+3. Abra WallpaperSceneExporter.exe.
+4. Escolha uma Scene .pkg, configure GIF ou video e inicie a exportacao.
+5. Os arquivos concluidos ficam na pasta output.
+
+REQUISITOS
+Windows 10 2004 ou posterior / Windows 11, x64.
+Wallpaper Engine instalado e licenciado via Steam.
+O runtime .NET 10 acompanha o aplicativo. Nao e necessario instalar o SDK.
+
+Voce tambem pode usar ffmpeg e ffprobe ja instalados, configurando o caminho
+nas configuracoes. Os dois executaveis precisam estar na mesma pasta e
+incluir libx264, palettegen e paletteuse.
+
+IMPORTANTE
+Apos uma exportacao bem-sucedida, a copia de entrada processada e removida.
+Ao importar pelo seletor ou arrastar e soltar, o arquivo original escolhido
+e mantido. Se voce mover manualmente um arquivo para input/scene.pkg,
+mantenha um backup quando quiser conserva-lo apos a exportacao.
+Cancelamento e erros preservam a Scene. Entradas recuperadas podem ficar
+em input/failed quando outra Scene ja ocupa input/scene.pkg.
+
+O log atual fica em logs/latest.log. Antes de compartilhar um log, revise
+os caminhos pessoais. Use apenas cenas e imagens que voce possa compartilhar.
+
+Codigo-fonte e instrucoes:
+https://github.com/JoaoVittorIshida/wallpaper-engine-scene-exporter
+
+Projeto independente, sem afiliacao com Wallpaper Engine, Valve ou FFmpeg.
+A licenca MIT cobre o codigo deste aplicativo. Os componentes de terceiros
+mantem suas proprias licencas; consulte THIRD-PARTY-NOTICES.md.
