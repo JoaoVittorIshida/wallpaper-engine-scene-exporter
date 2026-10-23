@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - name: Install cross compiler
         run: |
+          echo 'https://archive.ubuntu.com/ubuntu' | sudo tee /etc/apt/apt-mirrors.txt
           packages=(gcc-mingw-w64-x86-64-win32 mingw-w64-common mingw-w64-x86-64-dev nasm make pkg-config python3 xz-utils)
           options=(-o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
           if ! sudo timeout 180s apt-get "${options[@]}" install -y --no-install-recommends "${packages[@]}"; then
