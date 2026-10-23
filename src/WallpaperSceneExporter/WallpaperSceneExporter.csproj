@@ -9,8 +9,8 @@
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <AssemblyName>WallpaperSceneExporter</AssemblyName>
-    <Version>1.2.0</Version>
-    <InformationalVersion>1.2.0</InformationalVersion>
+    <Version>1.2.1</Version>
+    <InformationalVersion>1.2.1</InformationalVersion>
     <Title>Wallpaper Engine Scene Exporter</Title>
     <Description>Grava cenas do Wallpaper Engine em GIF animado ou vídeo MP4.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

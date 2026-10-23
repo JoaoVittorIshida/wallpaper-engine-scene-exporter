@@ -28,11 +28,14 @@ $files = @(
     "config.json",
     "THIRD-PARTY-NOTICES.md",
     "LICENSE.txt",
-    "LEIA-ME.txt",
-    "Instalar FFmpeg.cmd",
-    "scripts\Install-Ffmpeg.ps1",
-    "scripts\ffmpeg-manifest.json"
+    "LEIA-ME.txt"
 )
+$mediaDirectory = Join-Path $sourceDirectory 'ffmpeg'
+if (-not (Test-Path -LiteralPath (Join-Path $mediaDirectory 'ffmpeg.exe'))) {
+    throw 'Publicação incompleta: ferramentas de mídia ausentes.'
+}
+$files += Get-ChildItem -LiteralPath $mediaDirectory -Recurse -File |
+    ForEach-Object { 'ffmpeg\' + $_.FullName.Substring($mediaDirectory.Length + 1) }
 $licenseDirectory = Join-Path $sourceDirectory 'licenses'
 if (Test-Path -LiteralPath $licenseDirectory) {
     $files += Get-ChildItem -LiteralPath $licenseDirectory -Filter '*.txt' -File |

@@ -4,18 +4,27 @@ The MIT license in this project applies to the Wallpaper Engine Scene Exporter c
 
 ## FFmpeg and ffprobe
 
-The repository and public application ZIP do **not** redistribute FFmpeg executables. `Instalar FFmpeg.cmd` / `scripts/Install-Ffmpeg.ps1` downloads the following unmodified package directly from its provider for local use:
+The portable application ZIP includes **FFmpeg and ffprobe 9.0.2**, compiled by this
+project with **x264** at commit `31e19f92f00c7003fa115047ce50978bc98c3a0d` and
+**zlib 1.3.1**. These FFmpeg binaries are licensed under **GPL-2.0-or-later**.
+All upstream sources are unmodified. No nonfree components are enabled.
 
-- Version: **9.0.2**, essentials Windows x64 build by Gyan Doshi.
-- Provider: https://www.gyan.dev/ffmpeg/builds/
-- Pinned archive: https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip
-- SHA-256: `60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba`
-- Build license: **GPLv3**; includes external components such as libx264 with their respective licenses.
-- FFmpeg project: https://ffmpeg.org/
-- License information: https://ffmpeg.org/legal.html
-- FFmpeg source release: https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz
+- FFmpeg: https://ffmpeg.org/ — https://ffmpeg.org/legal.html
+- x264: https://www.videolan.org/developers/x264.html — GPL-2.0-or-later.
+- zlib: https://zlib.net/ — zlib license.
+- MinGW-w64 runtime notices and runtime exceptions: `ffmpeg/licenses/MinGW-w64-copyright.txt`.
 
-The provider's `LICENSE` and `README.txt`, including build configuration and the exact FFmpeg source reference, are installed beside `ffmpeg.exe` and `ffprobe.exe`. Keep those files with that local installation. A generic FFmpeg source archive is not a substitute for all corresponding sources of the provider's external libraries when redistributing its native build.
+The complete corresponding source archives of FFmpeg, x264 and zlib, their
+SHA-256 manifest, build script and instructions are included in **`ffmpeg/sources`**
+in the same application ZIP. Full native license texts are in **`ffmpeg/licenses`**;
+generated configuration, toolchain versions and system DLL imports are in
+**`ffmpeg/build-info`**. See `docs/NATIVE-BUILD.md` in the repository to rebuild.
+Keep these files with any redistribution of the native binaries.
+
+The optional developer-only `scripts/Install-Ffmpeg.ps1` downloads a pinned Gyan
+build directly from its provider for local development. That downloaded build is
+not used in the public portable ZIP; `Publish.ps1` requires the project-built
+tools and their corresponding sources.
 
 FFmpeg is invoked as a separate executable through standard input and command-line arguments. Its libraries are not linked into this application.
 

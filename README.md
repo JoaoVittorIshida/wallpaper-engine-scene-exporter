@@ -27,17 +27,16 @@ O aplicativo usa o **próprio Wallpaper Engine para renderizar a cena** em uma j
 
 **Requisitos:** Windows 10 versão 2004 ou posterior / Windows 11, x64, e Wallpaper Engine instalado pela Steam.
 
-1. Baixe `WallpaperEngineSceneExporter-1.2.0-win-x64.zip` na página de [Releases](https://github.com/JoaoVittorIshida/wallpaper-engine-scene-exporter/releases/latest).
+1. Baixe `WallpaperEngineSceneExporter-1.2.1-win-x64.zip` na página de [Releases](https://github.com/JoaoVittorIshida/wallpaper-engine-scene-exporter/releases/latest).
 2. Extraia o ZIP inteiro para uma pasta onde você tenha permissão de gravação.
-3. Execute **Instalar FFmpeg.cmd** uma vez. Ele baixa FFmpeg 9.0.2 e ffprobe diretamente de gyan.dev e confere o SHA-256 antes de instalar os arquivos na subpasta `ffmpeg`. Essa etapa precisa de internet.
-4. Abra **WallpaperSceneExporter.exe**.
+3. Abra **WallpaperSceneExporter.exe**.
 
-O pacote inclui o runtime **.NET 10**. Não é necessário instalar o SDK ou configurar FFmpeg globalmente. Se você já possui FFmpeg e ffprobe compatíveis, pode informar o caminho em **Configurações**; os dois executáveis precisam estar na mesma pasta.
+O pacote inclui **.NET 10, FFmpeg e ffprobe**. Não precisa instalar dependências nem baixar ferramentas na primeira abertura. Mantenha a subpasta `ffmpeg` junto do executável. Se você já possui FFmpeg e ffprobe compatíveis, pode informar outro caminho em **Configurações**; os dois executáveis precisam estar na mesma pasta.
 
 O arquivo `SHA256SUMS.txt` da release permite conferir a integridade do ZIP:
 
 ```powershell
-Get-FileHash .\WallpaperEngineSceneExporter-1.2.0-win-x64.zip -Algorithm SHA256
+Get-FileHash .\WallpaperEngineSceneExporter-1.2.1-win-x64.zip -Algorithm SHA256
 ```
 
 ## Grave sua primeira cena
@@ -132,19 +131,21 @@ docs/                               Documentação e imagens
 
 O fluxo é: importar → renderizar no Wallpaper Engine → capturar a janela → codificar → validar → finalizar a entrada. As interfaces do pipeline permitem testar falhas sem abrir o Wallpaper Engine. A validação de vídeo usa também ffprobe sobre mídia real.
 
-O GitHub Actions executa a restauração bloqueada, build Release, testes e empacotamento em Windows. A captura real depende de sessão gráfica e Wallpaper Engine; ela é uma verificação separada dos testes de CI.
+O GitHub Actions compila as ferramentas de mídia com fontes fixos, executa a restauração bloqueada, build Release, testes com esses mesmos executáveis e empacotamento em Windows. A captura real depende de sessão gráfica e Wallpaper Engine; ela é uma verificação separada dos testes de CI.
 
 Consulte os [resultados da validação da versão 1.2.0](docs/VALIDATION.md).
 
 ### Gerar uma distribuição
 
+Primeiro compile as ferramentas conforme [NATIVE-BUILD.md](docs/NATIVE-BUILD.md), ou baixe o artefato `media-tools-win-x64` de uma execução do CI para `artifacts/ffmpeg-native`. Depois, no Windows:
+
 ```powershell
 .\scripts\Publish.ps1
 ```
 
-A pasta portátil fica em `artifacts/publish/v1.2.0/win-x64`. O ZIP e `SHA256SUMS.txt` ficam em `artifacts`. `Abrir Scene Exporter.cmd` inicia a publicação local mais recente.
+A pasta portátil fica em `artifacts/publish/v1.2.1/win-x64`. O ZIP e `SHA256SUMS.txt` ficam em `artifacts`. `Abrir Scene Exporter.cmd` inicia a publicação local mais recente.
 
-O ZIP público inclui o aplicativo autocontido, configuração padrão, instruções e instalador do FFmpeg. Os executáveis de terceiros são baixados diretamente do fornecedor na primeira configuração.
+O ZIP público inclui o aplicativo autocontido, configuração padrão, FFmpeg e ffprobe prontos, instruções, licenças e os fontes completos das ferramentas de mídia. O empacotamento confere os hashes dos executáveis nativos e dos fontes antes de publicar.
 
 Para atualizar uma instalação existente, feche essa cópia e execute:
 
@@ -152,7 +153,7 @@ Para atualizar uma instalação existente, feche essa cópia e execute:
 .\scripts\Update-Portable.ps1 -DestinationDirectory 'C:\caminho\da\instalacao'
 ```
 
-A atualização preserva configuração, FFmpeg instalado e as pastas de trabalho, e guarda backup dos arquivos substituídos em `artifacts/update-backups`.
+A atualização preserva configuração e as pastas de trabalho, atualiza as ferramentas de mídia incluídas e guarda backup dos arquivos substituídos em `artifacts/update-backups`.
 
 ## Diagnóstico e limitações
 
@@ -167,6 +168,8 @@ O log atual fica em `logs/latest.log`. Ao abrir uma issue, informe versão do ap
 ## Licença e créditos
 
 O código do aplicativo está sob a [licença MIT](LICENSE). Dependências mantêm suas próprias licenças; consulte [avisos de terceiros](src/WallpaperSceneExporter/THIRD-PARTY-NOTICES.md).
+
+Esta distribuição usa FFmpeg com x264 sob GPL-2.0-or-later. Seus fontes completos, os fontes de zlib e as instruções de compilação acompanham o mesmo ZIP em `ffmpeg/sources`; as licenças estão em `ffmpeg/licenses`.
 
 Obrigado aos projetos [FFmpeg](https://ffmpeg.org/), [CommunityToolkit](https://github.com/CommunityToolkit/dotnet) e [Vortice.Windows](https://github.com/amerkoleci/Vortice.Windows).
 

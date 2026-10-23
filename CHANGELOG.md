@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1 — 2026-10-22
+
+- Pacote pronto para extrair e abrir o executável, com .NET, FFmpeg e ffprobe incluídos.
+- FFmpeg 9.0.2 compilado pelo projeto com x264 e zlib, incluindo fontes completos, licenças e instruções de compilação no mesmo ZIP.
+- CI verifica a aplicação com os mesmos executáveis nativos enviados na release.
+- Atualizador local também atualiza as ferramentas de mídia, preservando configuração e arquivos do usuário.
+
 ## 1.2.0 — 2026-10-22
 
 Primeira publicação pública do **Wallpaper Engine Scene Exporter**.
