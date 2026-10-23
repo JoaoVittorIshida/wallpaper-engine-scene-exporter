@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.2 — 2026-10-22
+
+- Logo própria criada com GPT Image e aplicada ao cabeçalho do aplicativo e ao README.
+- Ícone do executável, das janelas e da barra de tarefas com versões de 16 a 256 pixels e transparência.
+- PNG original, ícone ICO, prompt e script de conversão incluídos no repositório.
+- Distribuição portátil atualizada com a nova identidade visual; .NET, FFmpeg e ffprobe continuam incluídos.
+
 ## 1.2.1 — 2026-10-22
 
 - Pacote pronto para extrair e abrir o executável, com .NET, FFmpeg e ffprobe incluídos.

@@ -1,3 +1,5 @@
+<img src="src/WallpaperSceneExporter/Assets/brand-mark.png" width="96" height="96" alt="Logo do Wallpaper Engine Scene Exporter">
+
 # Wallpaper Engine Scene Exporter
 
 **Grave cenas do Wallpaper Engine e exporte a animação como GIF ou vídeo MP4.**
@@ -27,7 +29,7 @@ O aplicativo usa o **próprio Wallpaper Engine para renderizar a cena** em uma j
 
 **Requisitos:** Windows 10 versão 2004 ou posterior / Windows 11, x64, e Wallpaper Engine instalado pela Steam.
 
-1. Baixe `WallpaperEngineSceneExporter-1.2.1-win-x64.zip` na página de [Releases](https://github.com/JoaoVittorIshida/wallpaper-engine-scene-exporter/releases/latest).
+1. Baixe `WallpaperEngineSceneExporter-1.2.2-win-x64.zip` na página de [Releases](https://github.com/JoaoVittorIshida/wallpaper-engine-scene-exporter/releases/latest).
 2. Extraia o ZIP inteiro para uma pasta onde você tenha permissão de gravação.
 3. Abra **WallpaperSceneExporter.exe**.
 
@@ -36,7 +38,7 @@ O pacote inclui **.NET 10, FFmpeg e ffprobe**. Não precisa instalar dependênci
 O arquivo `SHA256SUMS.txt` da release permite conferir a integridade do ZIP:
 
 ```powershell
-Get-FileHash .\WallpaperEngineSceneExporter-1.2.1-win-x64.zip -Algorithm SHA256
+Get-FileHash .\WallpaperEngineSceneExporter-1.2.2-win-x64.zip -Algorithm SHA256
 ```
 
 ## Grave sua primeira cena
@@ -143,7 +145,7 @@ Primeiro compile as ferramentas conforme [NATIVE-BUILD.md](docs/NATIVE-BUILD.md)
 .\scripts\Publish.ps1
 ```
 
-A pasta portátil fica em `artifacts/publish/v1.2.1/win-x64`. O ZIP e `SHA256SUMS.txt` ficam em `artifacts`. `Abrir Scene Exporter.cmd` inicia a publicação local mais recente.
+A pasta portátil fica em `artifacts/publish/v1.2.2/win-x64`. O ZIP e `SHA256SUMS.txt` ficam em `artifacts`. `Abrir Scene Exporter.cmd` inicia a publicação local mais recente.
 
 O ZIP público inclui o aplicativo autocontido, configuração padrão, FFmpeg e ffprobe prontos, instruções, licenças e os fontes completos das ferramentas de mídia. O empacotamento confere os hashes dos executáveis nativos e dos fontes antes de publicar.
 

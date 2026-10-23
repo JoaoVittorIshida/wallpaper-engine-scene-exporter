@@ -1,4 +1,4 @@
-Wallpaper Engine Scene Exporter 1.2.1
+Wallpaper Engine Scene Exporter 1.2.2
 
 Grave cenas do Wallpaper Engine em GIF animado ou video MP4.
 
