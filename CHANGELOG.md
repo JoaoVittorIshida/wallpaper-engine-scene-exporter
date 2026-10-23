@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.2.2 — 2026-10-22
+## 1.2.2 — 2026-10-23
 
 - Logo própria criada com GPT Image e aplicada ao cabeçalho do aplicativo e ao README.
+- Imagem da interface no README atualizada para a nova identidade visual.
 - Ícone do executável, das janelas e da barra de tarefas com versões de 16 a 256 pixels e transparência.
 - PNG original, ícone ICO, prompt e script de conversão incluídos no repositório.
 - Distribuição portátil atualizada com a nova identidade visual; .NET, FFmpeg e ffprobe continuam incluídos.
