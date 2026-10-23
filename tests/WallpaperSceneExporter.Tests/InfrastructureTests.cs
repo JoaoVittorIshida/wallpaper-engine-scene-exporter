@@ -96,6 +96,51 @@ public sealed class InfrastructureTests : IDisposable
     }
 
     [Fact]
+    public async Task IdleApplicationClosesWithoutWpfReentrancyCrash()
+    {
+        using var timeout = CancellationTokenSource.CreateLinkedTokenSource(TestContext.Current.CancellationToken);
+        timeout.CancelAfter(TimeSpan.FromSeconds(30));
+        string directory = Path.Combine(_directory, "idle app with spaces");
+        Directory.CreateDirectory(directory);
+        foreach (string file in Directory.GetFiles(AppContext.BaseDirectory))
+        {
+            string extension = Path.GetExtension(file);
+            if (extension is ".dll" or ".json" || Path.GetFileName(file) == "WallpaperSceneExporter.exe")
+                File.Copy(file, Path.Combine(directory, Path.GetFileName(file)));
+        }
+        await File.WriteAllTextAsync(Path.Combine(directory, "config.json"),
+            System.Text.Json.JsonSerializer.Serialize(new AppConfig()), timeout.Token);
+        Directory.CreateDirectory(Path.Combine(directory, "ffmpeg"));
+        foreach (string name in new[] { "ffmpeg.exe", "ffprobe.exe" })
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "ffmpeg", name), Path.Combine(directory, "ffmpeg", name));
+
+        using var process = new System.Diagnostics.Process
+        {
+            StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = Path.Combine(directory, "WallpaperSceneExporter.exe"),
+                WorkingDirectory = directory,
+                UseShellExecute = false,
+                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+            }
+        };
+        Assert.True(process.Start());
+        try
+        {
+            while (process.MainWindowHandle == IntPtr.Zero && !process.HasExited)
+            {
+                await Task.Delay(100, timeout.Token);
+                process.Refresh();
+            }
+            Assert.False(process.HasExited, "O aplicativo deve abrir antes de ser fechado.");
+            Assert.True(process.CloseMainWindow());
+            await process.WaitForExitAsync(timeout.Token);
+            Assert.Equal(0, process.ExitCode);
+        }
+        finally { ProcessRunner.TryKill(process); }
+    }
+
+    [Fact]
     public async Task ExternalProcessIsKilledAfterTimeout()
     {
         CancellationToken cancellationToken = TestContext.Current.CancellationToken;

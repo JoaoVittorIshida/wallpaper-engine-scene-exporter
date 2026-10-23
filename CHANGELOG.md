@@ -6,6 +6,7 @@
 - FFmpeg 9.0.2 compilado pelo projeto com x264 e zlib, incluindo fontes completos, licenças e instruções de compilação no mesmo ZIP.
 - CI verifica a aplicação com os mesmos executáveis nativos enviados na release.
 - Atualizador local também atualiza as ferramentas de mídia, preservando configuração e arquivos do usuário.
+- Fechamento com o aplicativo ocioso agenda a chamada final após o evento `Closing`, evitando uma exceção de reentrada do WPF.
 
 ## 1.2.0 — 2026-10-22
 

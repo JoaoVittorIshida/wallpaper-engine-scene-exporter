@@ -84,7 +84,10 @@ public partial class App : Application
         finally
         {
             _shutdownReady = true;
-            if (sender is Window closingWindow) closingWindow.Close();
+            // Idle disposal may finish synchronously while WPF is still raising Closing.
+            // Post the final close so that the cancelled event has unwound first.
+            if (sender is Window closingWindow)
+                _ = closingWindow.Dispatcher.BeginInvoke(new Action(closingWindow.Close));
         }
     }
 
