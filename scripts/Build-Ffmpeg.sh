@@ -76,6 +76,7 @@ cp LICENSE.md "$output/licenses/FFmpeg-LICENSE.md"
 cp "$work/zlib-1.3.1/LICENSE" "$output/licenses/zlib-LICENSE.txt"
 cp config.h ffbuild/config.mak ffbuild/config.log "$output/build-info/"
 cp /usr/share/doc/mingw-w64-common/copyright "$output/licenses/MinGW-w64-copyright.txt"
+cp /usr/share/doc/gcc-mingw-w64-x86-64-win32/copyright "$output/licenses/GCC-copyright.txt"
 {
     "$CC" --version
     nasm -v

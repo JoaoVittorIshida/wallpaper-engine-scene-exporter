@@ -14,12 +14,17 @@ permissions:
 jobs:
   media-tools:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - name: Install cross compiler
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends gcc-mingw-w64-x86-64-win32 mingw-w64-common mingw-w64-x86-64-dev nasm make pkg-config python3 xz-utils
+          packages=(gcc-mingw-w64-x86-64-win32 mingw-w64-common mingw-w64-x86-64-dev nasm make pkg-config python3 xz-utils)
+          options=(-o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
+          if ! sudo timeout 180s apt-get "${options[@]}" install -y --no-install-recommends "${packages[@]}"; then
+            sudo timeout 120s apt-get "${options[@]}" update
+            sudo timeout 180s apt-get "${options[@]}" install -y --no-install-recommends "${packages[@]}"
+          fi
       - name: Build bundled media tools and corresponding sources
         run: bash scripts/Build-Ffmpeg.sh
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

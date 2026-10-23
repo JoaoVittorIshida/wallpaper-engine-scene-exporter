@@ -19,7 +19,7 @@ $nativeDirectory = Join-Path $repository 'artifacts\ffmpeg-native'
 $nativeRequired = @('ffmpeg.exe', 'ffprobe.exe', 'SHA256SUMS.txt', 'README.txt',
     'sources\Build-Ffmpeg.sh', 'sources\native-sources.json', 'sources\README.md',
     'licenses\COPYING.GPLv2', 'licenses\x264-COPYING.txt', 'licenses\zlib-LICENSE.txt',
-    'licenses\MinGW-w64-copyright.txt', 'build-info\config.h', 'build-info\config.mak',
+    'licenses\MinGW-w64-copyright.txt', 'licenses\GCC-copyright.txt', 'build-info\config.h', 'build-info\config.mak',
     'build-info\x264-config.h', 'build-info\x264-config.mak', 'build-info\toolchain.txt')
 foreach ($relative in $nativeRequired) {
     if (-not (Test-Path -LiteralPath (Join-Path $nativeDirectory $relative) -PathType Leaf)) {

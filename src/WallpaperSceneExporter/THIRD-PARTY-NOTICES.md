@@ -13,6 +13,7 @@ All upstream sources are unmodified. No nonfree components are enabled.
 - x264: https://www.videolan.org/developers/x264.html — GPL-2.0-or-later.
 - zlib: https://zlib.net/ — zlib license.
 - MinGW-w64 runtime notices and runtime exceptions: `ffmpeg/licenses/MinGW-w64-copyright.txt`.
+- GCC runtime notices: `ffmpeg/licenses/GCC-copyright.txt`; GCC Runtime Library Exception 3.1: `licenses/GCC-RUNTIME-EXCEPTION.txt`.
 
 The complete corresponding source archives of FFmpeg, x264 and zlib, their
 SHA-256 manifest, build script and instructions are included in **`ffmpeg/sources`**
